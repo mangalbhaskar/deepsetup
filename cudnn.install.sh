@@ -82,16 +82,16 @@ else
   echo "Runtime Lib is required to install Dev lib and User Guide"
 fi
 
-# Ubuntu 18.04 LTS
-if [[ $LINUX_VERSION == "18.04" ]]; then
-  echo $LINUX_VERSION
-  # so to fix this, just make gcc6 available
-  # first install gcc6 and g++6
-  sudo -E apt -q -y install gcc-6 g++-6
-  # next, link them into your cuda stack
-  sudo ln -s /usr/bin/gcc-6 /usr/local/cuda/bin/gcc 
-  sudo ln -s /usr/bin/g++-6 /usr/local/cuda/bin/g++
-fi
+# # Ubuntu 18.04 LTS
+# if [[ $LINUX_VERSION == "18.04" ]]; then
+#   echo $LINUX_VERSION
+#   # so to fix this, just make gcc6 available
+#   # first install gcc6 and g++6
+#   sudo -E apt -q -y install gcc-6 g++-6
+#   # next, link them into your cuda stack
+#   sudo ln -s /usr/bin/gcc-6 /usr/local/cuda/bin/gcc 
+#   sudo ln -s /usr/bin/g++-6 /usr/local/cuda/bin/g++
+# fi
 
 
 ## TBD: verification pending

@@ -24,21 +24,9 @@ export PATH=$PATH:$LSCRIPTS
 cd $LSCRIPTS
 
 ##----------------------------------------------------------
-## Nvidia GPU Drivers
+## Nvidia GPU Drivers should be pre-installed
+## Refer init-nvidia.sh
 ##----------------------------------------------------------
-
-## Ubuntu 16.04 LTS
-## Install in Virtual Console
-if [[ $LINUX_VERSION == "16.04" ]]; then
-  echo "...$LINUX_VERSION"
-  source $LSCRIPTS/nvidia-ubuntu-1604.install.sh
-fi
-
-# Ubuntu 18.04 LTS
-if [[ $LINUX_VERSION == "18.04" ]]; then
-  echo $LINUX_VERSION
-  source $LSCRIPTS/nvidia-ubuntu-1804.install.sh
-fi
 
 # # ##----------------------------------------------------------
 # # ## CUDA, Optional(cuDNN, TensorRT)
@@ -118,18 +106,12 @@ sudo -E apt -q -y install dconf-editor
 # cmd image viewer
 sudo -E apt -q -y install feh
 
-
 # openvpn
 sudo -E apt -q -y install openvpn
-
-# * Enabe "New Document" Option
-# https://linuxconfig.org/how-to-create-desktop-shortcut-launcher-on-ubuntu-18-04-bionic-beaver-linux
-touch $HOME/Templates/Empty\ Document
 
 ## https://stackoverflow.com/questions/7106012/download-a-single-folder-or-directory-from-a-github-repo
 sudo -E apt -q -y install subversion
 sudo -E apt -q -y install libcanberra-gtk-module
-
 
 ##----------------------------------------------------------
 ## Diff-tools
@@ -137,35 +119,6 @@ sudo -E apt -q -y install libcanberra-gtk-module
 ##----------------------------------------------------------
 sudo -E apt -q -y install tkcvs
 sudo -E apt -q -y install meld
-
-##----------------------------------------------------------
-## Haroopad
-##----------------------------------------------------------
-if [ -z "$HAROOPAD_VER" ]; then
-  HAROOPAD_VER="0.13.1"
-  echo "Unable to get HAROOPAD_VER version, falling back to default version#: $HAROOPAD_VER"
-fi
-
-sudo -E apt -q -y install libgconf2-4
-
-PROG='haroopad'
-FILE="$PROG-v$HAROOPAD_VER-x64.deb"
-echo "$FILE"
-
-if [ ! -f $HOME/Downloads/$FILE ]; then
-  #wget https://bitbucket.org/rhiokim/haroopad-download/downloads/haroopad-v0.13.1-x64.deb
-  wget https://bitbucket.org/rhiokim/haroopad-download/downloads/$FILE -P $HOME/Downloads
-else
-  echo Not downloading as: $HOME/Downloads/$FILE already exists!
-fi
-sudo dpkg -i $HOME/Downloads/$FILE
-
-##----------------------------------------------------------
-## Installing Adobe Flash Player and Plugin for browser
-##----------------------------------------------------------
-sudo add-apt-repository -y "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
-sudo -E apt update
-sudo -E apt -q -y install adobe-flashplugin browser-plugin-freshplayer-pepperflash
 
 ##----------------------------------------------------------
 ### Java 
@@ -192,20 +145,17 @@ source $LSCRIPTS/apache2.install.sh
 ##----------------------------------------------------------
 source $LSCRIPTS/nodejs.install.sh
 
-
 ##----------------------------------------------------------
 ## Graphics, Multimedia
 ##----------------------------------------------------------
 ##----------------------------------------------------------
 ### VLC
 ##----------------------------------------------------------
-sudo -E apt update
 sudo -E apt -q -y install vlc browser-plugin-vlc
 
 ##----------------------------------------------------------
 ## ffmpeg
 ##----------------------------------------------------------
-sudo -E apt update
 #sudo -E apt -q -y install ffmpeg frei0r-plugins
 sudo -E apt -q -y install ffmpeg
 
@@ -214,3 +164,4 @@ sudo -E apt -q -y install ffmpeg
 ##----------------------------------------------------------
 
 source $LSCRIPTS/python.virtualenvwrapper.install.sh 3
+source $LSCRIPTS/python.virtualenvwrapper.install.sh 2
