@@ -1,7 +1,9 @@
 # AI Machine Setup Steps
 
-* These instructions will get you started with the AI on a new machine
-* Tested on `Ubuntu 16.04 LTS` and `Ubuntu  18.04 LTS`
+A curated list of Shell Scripts, Resources, Libraries, Software for AI ML DL . Inspired by [`linuxscripts`](https://github.com/mangalbhaskar/linuxscripts)
+
+
+Tested on `Ubuntu 16.04 LTS` and `Ubuntu  18.04 LTS`
 
 
 ## Remote Access Setup (optional)
@@ -44,29 +46,44 @@ smbserver="10.4.71.121"
 remotepath="/data/samba/software/packages-for-new-system-install"
 rsync -r ${smbuser}@${smbserver}:${remotepath} $HOME/Downloads
 ```
-
-
-### 2. Run setup script
-
-1. execute `setup.sh` which is a binding of all softwares
+### 2. Nvidia driver installation
+* **WARNING:**
+  * Do not change/reinstall driver if it is already installed probably in new system
+  * Check using command 'nvidia-smi'
+  * Reboot happens once the nvidia graphics driver is installed
+```bash
+cd $HOME/softwares/deepsetup
+source init-nvidia.sh
+```
+  * To check the drivers
   ```bash
   cd $HOME/softwares/deepsetup
-  source setup.sh
+  source nvidia-driver-info.sh
   ```
+  
+### 3. Install cuda
 * **WARNING:**
-  * Do not change/reinstall driver if it is already installed probably new system
-  * Reboot happens once the nvidia graphics driver is installed
   * Add cuda repo key manually on error and again "source cuda.install.sh"
     * Keys for Nvidia CUDA signed repo
     ```bash
     gpg --keyserver keyserver.ubuntu.com --recv-keys F60F4B3D7FA2AF80
     gpg --export --armor F60F4B3D7FA2AF80 | sudo apt-key add -
     ```
-  * Setup apache configuration for userdir, wsgi
-   * The entries are already in output in terminal
-   * Open and edit those two files
-  *  `Python3` by default is passed as arguement for wrapper
-* **Optional Packages:**
+    ```bash
+    source cuda.install.sh
+    ```
+
+### 4. Run setup script
+* **Execute `setup.sh` which is a binding of all softwares**
+```bash
+source setup.sh
+```
+    * **WARNING:**
+       * Setup apache configuration for userdir, wsgi
+       * The entries are already in output in terminal
+       * Open and edit those two files
+
+* **Optional Packages**
   * Install cuDNN
     ```bash
     ## Check gcc --version compactibility
@@ -76,14 +93,15 @@ rsync -r ${smbuser}@${smbserver}:${remotepath} $HOME/Downloads
   * Install tensorRT
     ```bash
     source tensorRT.install.sh
-    ```
-2. **Apache server test**
+  ```
+
+* **Apache server test**
   * Test the apache2, process in browser by:
   ```bash
   http://localhost/~<username>
   http://localhost/~<username>/info.php
   ```
-3. **Python environment setup**
+* **Python environment setup**
   * Now install the python environment wrappers for both python2 and python3
   ```bash
   #
@@ -105,7 +123,7 @@ rsync -r ${smbuser}@${smbserver}:${remotepath} $HOME/Downloads
   * **Note**: If there is an interrupt and the installation fails, restart the installation
 
 
-### 3. **Setup AI Directories**
+### 5. **Setup AI Directories**
 
 * Clone the ai-ml-dl directory
   ```bash
