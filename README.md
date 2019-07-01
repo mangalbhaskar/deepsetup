@@ -94,7 +94,6 @@ source setup.sh
     ```bash
     source tensorRT.install.sh
   ```
-
 * **Apache server test**
   * Test the apache2, process in browser by:
   ```bash
