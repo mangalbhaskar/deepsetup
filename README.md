@@ -35,8 +35,8 @@ These instructions will get you started with the AI on a new machine
      		 2. Reboot happens once the nvidia graphics driver is installed
      		 3. Add cuda repo key manually on error and again "source cuda.install.sh"
      		    * Keys for Nvidia CUDA signed repo
-				    gpg --keyserver keyserver.ubuntu.com --recv-keys F60F4B3D7FA2AF80
-				    gpg --export --armor F60F4B3D7FA2AF80 | sudo apt-key add -
+				   gpg --keyserver keyserver.ubuntu.com --recv-keys F60F4B3D7FA2AF80
+				   gpg --export --armor F60F4B3D7FA2AF80 | sudo apt-key add -
               4. Setup apache html
                  * The entries are already in output in terminal
                  * Open and edit those two files
